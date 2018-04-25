@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
 
 export default class LoginScreenV2 extends Component {
     render() {
@@ -33,7 +33,7 @@ export default class LoginScreenV2 extends Component {
                             returnKeyType="next"
                             underlineColorAndroid={"transparent"}
                         />
-                        <Image 
+                        <Image
                             source={require('./assets/icons/mail_icon.png')}
                             resizeMode={'contain'}
                             style={styles.mailIcon}
@@ -49,7 +49,7 @@ export default class LoginScreenV2 extends Component {
                             returnKeyType="go"
                             underlineColorAndroid={"transparent"}
                         />
-                        <Image 
+                        <Image
                             source={require('./assets/icons/lock_icon.png')}
                             resizeMode={'contain'}
                             style={styles.mailIcon}
@@ -58,11 +58,12 @@ export default class LoginScreenV2 extends Component {
                     <TouchableOpacity style={styles.btnLogin}>
                         <Text style={styles.btnLoginText}>Login</Text>
                     </TouchableOpacity>
+                    <View style={styles.footerContainer}>
+                        <Text style={styles.footerLeft}>Create account</Text>
+                        <Text style={styles.footerRight}>Forgot password?</Text>
+                    </View>
                 </View>
-                <View style={styles.footerContainer}>
-                    <Text style={styles.footerLeft}>Create account</Text>
-                    <Text style={styles.footerRight}>Forgot password?</Text>
-                </View>
+
             </View>
         );
     }
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     },
     logoContainer: {
         width: '100%',
-        flex: 2,
+        flex: 1,
         // backgroundColor: 'yellow',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -132,10 +133,9 @@ const styles = StyleSheet.create({
     },
     footerContainer: {
         width: '100%',
-        flex: 1,
         // backgroundColor: 'pink',
         flexDirection: 'row',
-        padding: 40,
+        padding: 10,
     },
     footerLeft: {
         flex: 1,
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     footerRight: {
         flex: 1,
         textAlign: 'right',
-        color: '#fff'
+        color: '#fff',
+        textDecorationLine: 'underline'
     }
 });
