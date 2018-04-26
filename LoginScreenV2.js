@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '100%',
-        flex: 1,
+        flex: 1.5,
         // backgroundColor: 'green',
         padding: 30
     },
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         borderRadius: 10,
         fontSize: 16,
+        fontFamily: 'PoiretOne-Regular'
     },
     relativeContainer: {
         position: 'relative'
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
         width: '100%',
         // backgroundColor: 'pink',
         flexDirection: 'row',
-        padding: 10,
+        padding: 10
     },
     footerLeft: {
         flex: 1,
