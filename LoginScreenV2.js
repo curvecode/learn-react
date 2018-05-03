@@ -1,71 +1,85 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
+import MyImgBackground from './component/MyImgBackground';
+import MyInputText from './component/MyInputText';
+import MyButton from './component/MyButton';
+import MyText from './component/MyText';
+import MyPicker from './component/MyPicker';
 
 export default class LoginScreenV2 extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLogin: true,
+            selectedLang: ''
+        }
+    }
     render() {
         return (
             <View style={styles.container}>
                 {/** Comment inside JSX */}
-                <Image
-                    source={require('./assets/background-2.jpg')}
-                    resizeMode={'cover'}
-                    style={styles.backgroundImg}
-                />
+                <MyImgBackground source={require('./assets/background-2.jpg')} resizeMode={'cover'} style={styles.backgroundImg} />
                 <View style={styles.logoContainer}>
-                    <Image
-                        source={require('./assets/react-native-logo.png')}
-                        resizeMode={'contain'}
-                        style={{
-                            width: 150,
-                            height: 150
-                        }}
-                    />
+                    <MyImgBackground source={require('./assets/react-native-logo.png')} resizeMode={'contain'} style={{ width: 150, height: 150 }} />
                 </View>
                 <View style={styles.inputContainer}>
+                    {
+                        !this.state.isLogin && (
+                            <View>
+                                <MyInputText style={styles.inputText} placeholder="Full Name" keyboardType="default" />
+                                <MyImgBackground source={require('./assets/icons/lock_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
+                            </View>
+                        )
+                    }
                     <View style={styles.relativeContainer}>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="User name"
-                            placeholderTextColor="#fff"
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            returnKeyType="next"
-                            underlineColorAndroid={"transparent"}
-                        />
-                        <Image
-                            source={require('./assets/icons/mail_icon.png')}
-                            resizeMode={'contain'}
-                            style={styles.mailIcon}
-                        />
+                        <MyInputText style={styles.inputText} placeholder="User name" keyboardType="email-address" />
+                        <MyImgBackground source={require('./assets/icons/mail_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
                     </View>
                     <View>
-                        <TextInput
-                            ref={(input) => this.passwordInput = input}
-                            secureTextEntry={true}
-                            style={styles.inputText}
-                            placeholder="Password"
-                            placeholderTextColor="#fff"
-                            returnKeyType="go"
-                            underlineColorAndroid={"transparent"}
-                        />
-                        <Image
-                            source={require('./assets/icons/lock_icon.png')}
-                            resizeMode={'contain'}
-                            style={styles.mailIcon}
-                        />
+                        <MyInputText style={styles.inputText} placeholder="Password" keyboardType="default" secureTextEntry={true} />
+                        <MyImgBackground source={require('./assets/icons/lock_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
                     </View>
-                    <TouchableOpacity style={styles.btnLogin}>
-                        <Text style={styles.btnLoginText}>Login</Text>
-                    </TouchableOpacity>
+                    {
+                        !this.state.isLogin && (
+                            <View>
+                                <MyInputText style={styles.inputText} placeholder="Re-type password" keyboardType="default" />
+                                <MyImgBackground source={require('./assets/icons/lock_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
+                            </View>
+                        )
+                    }
+                    <View>
+                        <MyPicker
+                            style={{
+                                height: 52,
+                                backgroundColor: '#435464',
+                                color: '#fff',
+                                paddingLeft: 50,
+                                marginBottom: 8,
+                                borderRadius: 10,
+                            }}
+                            isIOS={false}
+                            selectedValue={this.state.selectedLang}
+                            data={[
+                                { name: 'Java', value: 'java' },
+                                { name: 'JavaScript', value: 'js' },
+                                { name: 'HTML', value: 'html' },
+                                { name: 'CSS', value: 'css' }
+                            ]}
+                            onValueChange={(value, item) => this.onSelectedItem(value, item)} />
+                    </View>
+                    <MyButton styleBtn={styles.btnLogin} styleText={styles.btnLoginText} btnText={this.state.isLogin ? "Login" : "Sign up"} />
                     <View style={styles.footerContainer}>
-                        <Text style={styles.footerLeft}>Create account</Text>
-                        <Text style={styles.footerRight}>Forgot password?</Text>
+                        <MyText style={styles.footerLeft} text={this.state.isLogin ? "Create account" : "Sign in"} onPress={() => { this.setState({ isLogin: !this.state.isLogin }) }} />
+                        <MyText style={styles.footerRight} text="Forgot password?" />
                     </View>
                 </View>
-
             </View>
         );
+    }
+
+    onSelectedItem(value, index) {
+        this.setState({ selectedLang: value })
     }
 }
 
