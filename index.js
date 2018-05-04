@@ -4,6 +4,6 @@ import App from './App';
 // import SignUp from './SignUp';
 import LoginScreenV2 from './LoginScreenV2'
 // AppRegistry.registerComponent('HelloApp', () => App);
-
+// import DropDownComponent from './components/picker/dropdown';
 // AppRegistry.registerComponent('HelloApp', () => SignUp);
 AppRegistry.registerComponent('HelloApp', () => LoginScreenV2);

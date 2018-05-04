@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, Alert } from 'react-native';
 import MyImgBackground from './component/MyImgBackground';
 import MyInputText from './component/MyInputText';
 import MyButton from './component/MyButton';
@@ -10,18 +10,31 @@ export default class LoginScreenV2 extends Component {
 
     constructor(props) {
         super(props);
+        
         this.state = {
             isLogin: true,
-            selectedLang: ''
+            gender: '',
+            job: ''
         }
     }
     render() {
+        const jobs = [
+            { label: 'Student', value: 'student' },
+            { label: 'Software Engineer', value: 'se' },
+            { label: 'Doctor', value: 'dt' }
+        ];
+        const genders = [
+            { label: 'Unknow', value: '' },
+            { label: 'Male', value: 'male' },
+            { label: 'Female', value: 'female' }
+        ];
         return (
             <View style={styles.container}>
                 {/** Comment inside JSX */}
                 <MyImgBackground source={require('./assets/background-2.jpg')} resizeMode={'cover'} style={styles.backgroundImg} />
+                
                 <View style={styles.logoContainer}>
-                    <MyImgBackground source={require('./assets/react-native-logo.png')} resizeMode={'contain'} style={{ width: 150, height: 150 }} />
+                    <MyImgBackground source={require('./assets/react-native-logo.png')} resizeMode={'contain'} style={{ width: 100, height: 100 }} />
                 </View>
                 <View style={styles.inputContainer}>
                     {
@@ -48,26 +61,8 @@ export default class LoginScreenV2 extends Component {
                             </View>
                         )
                     }
-                    <View>
-                        <MyPicker
-                            style={{
-                                height: 52,
-                                backgroundColor: '#435464',
-                                color: '#fff',
-                                paddingLeft: 50,
-                                marginBottom: 8,
-                                borderRadius: 10,
-                            }}
-                            isIOS={false}
-                            selectedValue={this.state.selectedLang}
-                            data={[
-                                { name: 'Java', value: 'java' },
-                                { name: 'JavaScript', value: 'js' },
-                                { name: 'HTML', value: 'html' },
-                                { name: 'CSS', value: 'css' }
-                            ]}
-                            onValueChange={(value, item) => this.onSelectedItem(value, item)} />
-                    </View>
+                    <MyPicker icons={require('./assets/icons/job_icon.png')} items={jobs} selectedValue={this.state.job} onValueChange={(value, item) => { this.onSelectedItem(value, item) }} />
+                    <MyPicker icons={require('./assets/icons/gender_icon.png')} items={genders} selectedValue={this.state.gender} onValueChange={(value, item) => { this.onSelectedGender(value, item) }} />
                     <MyButton styleBtn={styles.btnLogin} styleText={styles.btnLoginText} btnText={this.state.isLogin ? "Login" : "Sign up"} />
                     <View style={styles.footerContainer}>
                         <MyText style={styles.footerLeft} text={this.state.isLogin ? "Create account" : "Sign in"} onPress={() => { this.setState({ isLogin: !this.state.isLogin }) }} />
@@ -79,7 +74,12 @@ export default class LoginScreenV2 extends Component {
     }
 
     onSelectedItem(value, index) {
-        this.setState({ selectedLang: value })
+        // Alert.alert('Selected job', value)
+        this.setState({ job: value });
+    }
+
+    onSelectedGender(value, i) {
+        this.setState({ gender: value});
     }
 }
 
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '100%',
-        flex: 1.5,
+        flex: 2,
         // backgroundColor: 'green',
         padding: 30
     },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         paddingLeft: 50,
         marginBottom: 8,
-        borderRadius: 10,
+        borderRadius: 0,
         fontSize: 16,
         fontFamily: 'PoiretOne-Regular'
     },
@@ -131,8 +131,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 10,
         top: 11,
-        width: 30,
-        height: 30
+        width: 24,
+        height: 24,
+        tintColor: '#fff'
     },
     btnLogin: {
         backgroundColor: '#56aaee',

@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import { Picker, Text } from 'react-native';
+import { View, Picker, Text, Image } from 'react-native';
+import MyImgBackground from './MyImgBackground';
+import styles from './styles';
 
 export default class MyPicker extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            language: 'js'
+            language: 'js',
+            job: '',
+            gender: ''
         }
     }
     render() {
         return (
-            this.props.isIOS ?
-                <Text>IOS</Text>
-                : <Picker
-                    style={this.props.style}
-                    selectedValue={this.props.selectedValue}
-                    mode={'dropdown'}
-                    onValueChange={this.props.onValueChange}
-                >
-                    {
-                        this.props.data.map((itemValue, index) => <Picker.Item label={itemValue.name} value={itemValue.value} /> )
-                    }
-                </Picker>
+            <View style={styles.inputContainer}>
+                <View style={styles.subInputContainer}>
+                    <Image source={this.props.icons} style={styles.inputIcon} />
+                    <Picker
+                        style={{ flex: 1, color: '#fff'}}
+                        mode={'dropdown'}
+                        selectedValue={this.props.selectedValue}
+                        onValueChange={this.props.onValueChange}
+                    >
+                        { this.props.items &&
+                            this.props.items.map((item, i) => <Picker.Item style={{fontFamily: 'PoiretOne-Regular'}} key={i} label={item.label} value={item.value} /> )
+                        }
+                    </Picker>
+                </View>
+            </View>
+
         );
     }
 }

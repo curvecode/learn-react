@@ -15,6 +15,7 @@ export default class MyInputText extends Component {
                 autoCorrect={false}
                 returnKeyType="next"
                 underlineColorAndroid={"transparent"}
+                onBlur={this.props.onBlur}
             ></TextInput>
         );
     }
