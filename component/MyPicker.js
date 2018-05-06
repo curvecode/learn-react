@@ -6,11 +6,6 @@ import styles from './styles';
 export default class MyPicker extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            language: 'js',
-            job: '',
-            gender: ''
-        }
     }
     render() {
         return (

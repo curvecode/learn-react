@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Alert, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, Alert, FlatList, ActivityIndicator, TouchableOpacity, Modal } from 'react-native';
 import MyText from './MyText';
+import MyModalComponent from './MyModal';
 export default class MyScrollView extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             movies: [],
-            arr: [
-                { title: 'ABC' },
-                { title: 'XYS' }
-            ],
             done: false,
+            isShow: false,
+            idPhoto: 0
         }
         this.fetchData();
     }
     showDetailItem = (id) => {
-        Alert.alert('Show detail item', id.toString());
+        // Alert.alert('Show detail item', id.toString());
+        this.setState({ idPhoto: id });
+        this.setState({ isShow: true });
         // console.log('Hello ' + id);
     }
     renderItemForList = (item) => {
         return (
             <View style={{ flexDirection: 'row', marginBottom: 1 }}>
-                <TouchableOpacity onPress={() => {this.showDetailItem(item.id)}}>
+                <TouchableOpacity onPress={() => { this.showDetailItem(item.id) }}>
                     <Image source={{ uri: item.thumbnailUrl }} style={{ height: 120, width: 120 }} />
                 </TouchableOpacity>
                 <Text style={{ padding: 5, fontSize: 14, color: '#fff' }}>{item.title}</Text>
@@ -43,6 +44,11 @@ export default class MyScrollView extends Component {
             }).catch((error) => {
                 console.error(error);
             });
+    }
+
+    handleHideModal() {
+        Alert.alert('Chao', 'Close nhe ?');
+        this.setState({ isShow: !isShow });
     }
     render() {
         let arrObject = [];
@@ -69,6 +75,49 @@ export default class MyScrollView extends Component {
                         <ActivityIndicator size="large" color="#0000ff" />
                     </View>
                 }
+                {
+                    this.state.isShow &&
+                    <View>
+                        <Modal
+                            animationType="slide"
+                            transparent
+                            onRequestClose={() => { this.setState({ isShow: false }) }}
+                            visible={this.state.isShow}
+                            onDismiss={() => { this.setState({ isShow: false }) }}
+                        >
+                            <View style={{
+                                paddingTop: 12,
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: 250,
+                                backgroundColor: '#dfe6e9',
+                                position: 'absolute',
+                                bottom: 0
+                            }}>
+                                <View style={{}}>
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                </View>
+                                <Text>Header of modal</Text>
+                                <View>
+                                    <Text>Title : {this.state.idPhoto}</Text>
+                                    <Text>Album Id : 1</Text>
+                                    <Text>Image</Text>
+                                    <Image source={{ uri: 'http://placehold.it/150/92c952' }} style={{ height: 120, width: 120 }}></Image>
+                                </View>
+
+                            </View>
+
+                        </Modal>
+                    </View>
+                }
+                {/* <View style={{position: 'absolute', right: 0, width: '100%', justifyContent: 'center', zIndex: 9}}>
+                    <TouchableOpacity onPress={() => { 
+                        Alert.alert('Chao', 'Chao');
+                     }}>
+                        <Text>Close</Text>
+                    </TouchableOpacity>
+                </View> */}
             </View >
         );
     }
