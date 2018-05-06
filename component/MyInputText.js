@@ -13,6 +13,7 @@ export default class MyInputText extends Component {
                 placeholderTextColor="#fff"
                 autoCapitalize="none"
                 autoCorrect={false}
+                returnKeyLabel={"next"}
                 returnKeyType="next"
                 underlineColorAndroid={"transparent"}
                 onBlur={this.props.onBlur}

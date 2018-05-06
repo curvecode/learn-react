@@ -24,7 +24,7 @@ export default class MyPicker extends Component {
                         onValueChange={this.props.onValueChange}
                     >
                         { this.props.items &&
-                            this.props.items.map((item, i) => <Picker.Item style={{fontFamily: 'PoiretOne-Regular'}} key={i} label={item.label} value={item.value} /> )
+                            this.props.items.map((item, i) => <Picker.Item key={i} label={item.label} value={item.value} /> )
                         }
                     </Picker>
                 </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform, Alert } from 'react-native';
+import { View, StyleSheet, Platform, Alert, KeyboardAvoidingView } from 'react-native';
 import MyImgBackground from './component/MyImgBackground';
 import MyInputText from './component/MyInputText';
 import MyButton from './component/MyButton';
@@ -29,7 +29,7 @@ export default class LoginScreenV2 extends Component {
             { label: 'Female', value: 'female' }
         ];
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.container}>
                 {/** Comment inside JSX */}
                 <MyImgBackground source={require('./assets/background-2.jpg')} resizeMode={'cover'} style={styles.backgroundImg} />
                 
@@ -46,7 +46,7 @@ export default class LoginScreenV2 extends Component {
                         )
                     }
                     <View style={styles.relativeContainer}>
-                        <MyInputText style={styles.inputText} placeholder="User name" keyboardType="email-address" />
+                        <MyInputText style={styles.inputText} placeholder="Email" keyboardType="email-address" />
                         <MyImgBackground source={require('./assets/icons/mail_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
                     </View>
                     <View>
@@ -61,15 +61,15 @@ export default class LoginScreenV2 extends Component {
                             </View>
                         )
                     }
-                    <MyPicker icons={require('./assets/icons/job_icon.png')} items={jobs} selectedValue={this.state.job} onValueChange={(value, item) => { this.onSelectedItem(value, item) }} />
-                    <MyPicker icons={require('./assets/icons/gender_icon.png')} items={genders} selectedValue={this.state.gender} onValueChange={(value, item) => { this.onSelectedGender(value, item) }} />
+                    {/* <MyPicker icons={require('./assets/icons/job_icon.png')} items={jobs} selectedValue={this.state.job} onValueChange={(value, item) => { this.onSelectedItem(value, item) }} /> */}
+                    {/* <MyPicker icons={require('./assets/icons/gender_icon.png')} items={genders} selectedValue={this.state.gender} onValueChange={(value, item) => { this.onSelectedGender(value, item) }} /> */}
                     <MyButton styleBtn={styles.btnLogin} styleText={styles.btnLoginText} btnText={this.state.isLogin ? "Login" : "Sign up"} />
                     <View style={styles.footerContainer}>
                         <MyText style={styles.footerLeft} text={this.state.isLogin ? "Create account" : "Sign in"} onPress={() => { this.setState({ isLogin: !this.state.isLogin }) }} />
                         <MyText style={styles.footerRight} text="Forgot password?" />
                     </View>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 

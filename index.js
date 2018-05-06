@@ -6,4 +6,8 @@ import LoginScreenV2 from './LoginScreenV2'
 // AppRegistry.registerComponent('HelloApp', () => App);
 // import DropDownComponent from './components/picker/dropdown';
 // AppRegistry.registerComponent('HelloApp', () => SignUp);
-AppRegistry.registerComponent('HelloApp', () => LoginScreenV2);
+// AppRegistry.registerComponent('HelloApp', () => LoginScreenV2);
+
+
+import MyScrollView from './component/MyScrollView';
+AppRegistry.registerComponent('HelloApp', () => MyScrollView);
