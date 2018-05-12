@@ -10,7 +10,9 @@ export default class MyScrollView extends Component {
             movies: [],
             done: false,
             isShow: false,
-            idPhoto: 0
+            idPhoto: 0,
+            loaded: false,
+            internalData: {}
         }
         this.fetchData();
     }
@@ -18,15 +20,18 @@ export default class MyScrollView extends Component {
         // Alert.alert('Show detail item', id.toString());
         this.setState({ idPhoto: id });
         this.setState({ isShow: true });
+        this.fetchPhotoInfo(id);
         // console.log('Hello ' + id);
     }
     renderItemForList = (item) => {
         return (
             <View style={{ flexDirection: 'row', marginBottom: 1 }}>
-                <TouchableOpacity onPress={() => { this.showDetailItem(item.id) }}>
+                <TouchableOpacity onPress={() => { this.showDetailItem(item.id) }} style={{flex: 1}}>
                     <Image source={{ uri: item.thumbnailUrl }} style={{ height: 120, width: 120 }} />
                 </TouchableOpacity>
-                <Text style={{ padding: 5, fontSize: 14, color: '#fff' }}>{item.title}</Text>
+                <View style={{padding: 10, flex: 1}}>
+                    <Text style={{ padding: 5, fontSize: 14, color: '#fff' }}>{item.title}</Text>
+                </View>
             </View>
         );
     }
@@ -45,10 +50,22 @@ export default class MyScrollView extends Component {
                 console.error(error);
             });
     }
-
+    fetchPhotoInfo(id) {
+        const LINK = 'https://jsonplaceholder.typicode.com/photos/';
+        return fetch(LINK + id).then((response) => response.json()).then((data) => {
+            // Set data state
+            this.setState({ internalData: data });
+            this.setState({ loaded: true });
+            return data;
+        }).catch((error) => {
+            console.log(err);
+            return null;
+        });
+    }
     handleHideModal() {
-        Alert.alert('Chao', 'Close nhe ?');
-        this.setState({ isShow: !isShow });
+        // Alert.alert('Chao', 'Close nhe ?');
+        this.setState({ isShow: !this.state.isShow });
+        this.setState({ loaded: !this.state.loaded })
     }
     render() {
         let arrObject = [];
@@ -81,10 +98,11 @@ export default class MyScrollView extends Component {
                         <Modal
                             animationType="slide"
                             transparent
-                            onRequestClose={() => { this.setState({ isShow: false }) }}
+                            onRequestClose={() => { this.handleHideModal() }}
                             visible={this.state.isShow}
-                            onDismiss={() => { this.setState({ isShow: false }) }}
+                            onDismiss={() => { this.handleHideModal() }}
                         >
+
                             <View style={{
                                 paddingTop: 12,
                                 width: '100%',
@@ -95,18 +113,24 @@ export default class MyScrollView extends Component {
                                 position: 'absolute',
                                 bottom: 0
                             }}>
-                                <View style={{}}>
-                                    <ActivityIndicator size="large" color="#0000ff" />
-                                </View>
-                                <Text>Header of modal</Text>
-                                <View>
-                                    <Text>Title : {this.state.idPhoto}</Text>
-                                    <Text>Album Id : 1</Text>
-                                    <Text>Image</Text>
-                                    <Image source={{ uri: 'http://placehold.it/150/92c952' }} style={{ height: 120, width: 120 }}></Image>
-                                </View>
-
+                                {
+                                    this.state.loaded &&
+                                    <View>
+                                        <Text>Header of modal</Text>
+                                        <View style={{padding: 10}}>
+                                            <Text>Title : {this.state.internalData.title}</Text>
+                                            <Text>Album Id : {this.state.internalData.albumId}</Text>
+                                            <Image source={{ uri: this.state.internalData.url }} style={{ height: 120, width: 120 }}></Image>
+                                        </View>
+                                    </View>
+                                    ||
+                                    <View style={{ flex: 1 }}>
+                                        <ActivityIndicator size="large" color="#0000ff" />
+                                    </View>
+                                }
                             </View>
+
+
 
                         </Modal>
                     </View>

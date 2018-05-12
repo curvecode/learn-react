@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, Text, TextInput, View, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Image, Text, TextInput, View, TouchableOpacity, Dimensions, Alert } from 'react-native';
 
 var { width, height } = Dimensions.get('window');
-
+const userData = {
+    usn: 'a',
+    pwd: 'a'
+}
 export default class Login extends Component {
-    constructor() {
-        super();
+
+    static navigationOptions = {
+        title: 'Login',
+        header: null,
+        headerBackTitle: null, // iOS
+    };
+    constructor(props) {
+        super(props);
         this.state = {
             username: '',
             password: ''
@@ -13,7 +22,11 @@ export default class Login extends Component {
     }
 
     onPressLogin = (e) => {
-        alert('Chao');
+        if (this.state.username === userData.usn && this.state.password === userData.pwd) {
+            this.props.navigation.navigate('AlbumScreen', { album: {photo: 'url'} });
+        } else {
+            Alert.alert('Error', 'Your email or password is wrong');
+        }
     }
 
     onPressSignUp = (e) => {
@@ -128,7 +141,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logoContainer: {
-        
+
     },
     loginContainer: {
         alignItems: 'center',
