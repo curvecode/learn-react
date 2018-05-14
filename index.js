@@ -12,5 +12,7 @@ import LoginScreenV2 from './LoginScreenV2'
 // import MyScrollView from './component/MyScrollView';
 // AppRegistry.registerComponent('HelloApp', () => MyScrollView);
 
-import LoginStackNavigation from './components/LoginStackNavigation'
-AppRegistry.registerComponent('HelloApp', () => LoginStackNavigation);
+// import LoginStackNavigation from './components/LoginStackNavigation'
+// AppRegistry.registerComponent('HelloApp', () => LoginStackNavigation);
+import ExampleTabNavigation from './components/ExampleTabNavigation';
+AppRegistry.registerComponent('HelloApp', () => ExampleTabNavigation);
