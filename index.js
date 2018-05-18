@@ -7,4 +7,5 @@ import Login01 from './components/login01/login01';
 // AppRegistry.registerComponent('HelloApp', () => App);
 
 // AppRegistry.registerComponent('HelloApp', () => SignUp);
-AppRegistry.registerComponent('HelloApp', () => Login01);
+import StackScreen from './components/stackScreen';
+AppRegistry.registerComponent('HelloApp', () => StackScreen);
