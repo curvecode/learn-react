@@ -10,11 +10,13 @@ export default class LoginScreenV2 extends Component {
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
             isLogin: true,
             gender: '',
-            job: ''
+            job: '',
+            userName: '',
+            passWord: ''
         }
     }
     render() {
@@ -32,7 +34,7 @@ export default class LoginScreenV2 extends Component {
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.container}>
                 {/** Comment inside JSX */}
                 <MyImgBackground source={require('./assets/background-2.jpg')} resizeMode={'cover'} style={styles.backgroundImg} />
-                
+
                 <View style={styles.logoContainer}>
                     <MyImgBackground source={require('./assets/react-native-logo.png')} resizeMode={'contain'} style={{ width: 100, height: 100 }} />
                 </View>
@@ -40,30 +42,35 @@ export default class LoginScreenV2 extends Component {
                     {
                         !this.state.isLogin && (
                             <View>
-                                <MyInputText style={styles.inputText} placeholder="Full Name" keyboardType="default" />
+                                <MyInputText style={styles.inputText} placeholder="Full Name" keyboardType="default"
+                                    onChange={(text) => { console.log('TODO') }} />
                                 <MyImgBackground source={require('./assets/icons/lock_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
                             </View>
                         )
                     }
                     <View style={styles.relativeContainer}>
-                        <MyInputText style={styles.inputText} placeholder="Email" keyboardType="email-address" />
+                        <MyInputText style={styles.inputText} placeholder="Email" keyboardType="email-address"
+                            onChange={(text) => { this.setState({ userName: text }) }} />
                         <MyImgBackground source={require('./assets/icons/mail_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
                     </View>
                     <View>
-                        <MyInputText style={styles.inputText} placeholder="Password" keyboardType="default" secureTextEntry={true} />
+                        <MyInputText style={styles.inputText} placeholder="Password" keyboardType="default" secureTextEntry={true}
+                            onChange={(text) => { this.setState({ passWord: text }) }} />
                         <MyImgBackground source={require('./assets/icons/lock_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
                     </View>
                     {
                         !this.state.isLogin && (
                             <View>
-                                <MyInputText style={styles.inputText} placeholder="Re-type password" keyboardType="default" />
+                                <MyInputText style={styles.inputText} placeholder="Re-type password" keyboardType="default"
+                                    onChange={(text) => { console.log('TODO') }} />
                                 <MyImgBackground source={require('./assets/icons/lock_icon.png')} resizeMode={'contain'} style={styles.mailIcon} />
                             </View>
                         )
                     }
                     {/* <MyPicker icons={require('./assets/icons/job_icon.png')} items={jobs} selectedValue={this.state.job} onValueChange={(value, item) => { this.onSelectedItem(value, item) }} /> */}
                     {/* <MyPicker icons={require('./assets/icons/gender_icon.png')} items={genders} selectedValue={this.state.gender} onValueChange={(value, item) => { this.onSelectedGender(value, item) }} /> */}
-                    <MyButton styleBtn={styles.btnLogin} styleText={styles.btnLoginText} btnText={this.state.isLogin ? "Login" : "Sign up"} />
+                    <MyButton styleBtn={styles.btnLogin} styleText={styles.btnLoginText} btnText={this.state.isLogin ? "Login" : "Sign up"}
+                        onPress={() => { this.handleLogin() }} />
                     <View style={styles.footerContainer}>
                         <MyText style={styles.footerLeft} text={this.state.isLogin ? "Create account" : "Sign in"} onPress={() => { this.setState({ isLogin: !this.state.isLogin }) }} />
                         <MyText style={styles.footerRight} text="Forgot password?" />
@@ -79,7 +86,16 @@ export default class LoginScreenV2 extends Component {
     }
 
     onSelectedGender(value, i) {
-        this.setState({ gender: value});
+        this.setState({ gender: value });
+    }
+
+    handleLogin() {
+        // TODO
+        this.props.navigation.navigate('DrawerNavigator');
+        // if (this.state.userName === 'a' && this.state.passWord === 'a') {
+        // } else {
+        //     Alert.alert('Email or password is wrong', 'Re-enter your email or password');
+        // }
     }
 }
 

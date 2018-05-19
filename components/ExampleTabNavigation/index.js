@@ -6,31 +6,32 @@ import TabScreen1 from './tabScreen1';
 import TabScreen2 from './tabScreen2';
 import StackScreenProfile from './tabScreen3';
 import LoginStack from '../LoginStackNavigation';
+// import ExampleDrawerNavigation from '../ExampleDrawerNavigation';
 
 export default createBottomTabNavigator({
     Splash: {
-        screen: TabScreen1,
+        screen: TabScreen1, // StackNavigator
         navigationOptions: {
-            title: 'Home Screen',
+            title: 'Home',
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Ionicons name={focused ? 'ios-home' : 'ios-home-outline'} size={25} color={tintColor} />;
             }
         }
     },
     Search: {
-        screen: TabScreen2,
+        screen: TabScreen2, // Just Screen
         navigationOptions: {
-            title: 'Search Screen',
+            title: 'Search',
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Ionicons name={focused ? 'ios-search' : 'ios-search-outline'} size={25} color={tintColor} />;
             }
         }
     },
     Profile: {
-        screen: LoginStack,
+        screen: LoginStack, // StackNavigator
         navigationOptions: {
-            title: 'Profile Screen',
-            tabBarIcon: ({ focused, tintColor}) => {
+            title: 'Login',
+            tabBarIcon: ({ focused, tintColor }) => {
                 return <Ionicons name={focused ? 'ios-information-circle' : 'ios-information-circle-outline'} size={25} color={tintColor} />
             }
         }

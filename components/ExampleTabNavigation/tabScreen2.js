@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import {  View, Text, } from 'react-native';
+import { View, Text, } from 'react-native';
+import { DrawerActions } from 'react-navigation';
 
 export default class TabScreen2 extends Component {
-  render() {
-    return (
-      <View>
-        <Text> Search page </Text>
-      </View>
-    );
-  }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            // tabBarOnPress: ({ previousScene, scene, jumpToIndex }) => {
+            //     navigation.dispatch(DrawerActions.toggleDrawer());
+            // }
+        };
+    };
+    render() {
+        return (
+            <View>
+                <Text> Search page </Text>
+            </View>
+        );
+    }
 }

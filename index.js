@@ -7,12 +7,12 @@ import LoginScreenV2 from './LoginScreenV2'
 // import DropDownComponent from './components/picker/dropdown';
 // AppRegistry.registerComponent('HelloApp', () => SignUp);
 // AppRegistry.registerComponent('HelloApp', () => LoginScreenV2);
-
+console.disableYellowBox = true;
 
 // import MyScrollView from './component/MyScrollView';
 // AppRegistry.registerComponent('HelloApp', () => MyScrollView);
 
-// import LoginStackNavigation from './components/LoginStackNavigation'
-// AppRegistry.registerComponent('HelloApp', () => LoginStackNavigation);
-import ExampleTabNavigation from './components/ExampleTabNavigation';
+import ExampleTabNavigation from './components/ParentStackNavigator'
 AppRegistry.registerComponent('HelloApp', () => ExampleTabNavigation);
+// import ExampleDrawerNavigation from './components/ExampleDrawerNavigation';
+// AppRegistry.registerComponent('HelloApp', () => ExampleDrawerNavigation);

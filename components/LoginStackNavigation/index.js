@@ -6,7 +6,7 @@ import Photo from './photoScreen'
 export default createStackNavigator({
     LoginScreen: Login,
     AlbumScreen: Album,
-    PhotoScreen: Photo
+    PhotoScreen: Photo,
 },
     {
         initialRouteName: 'LoginScreen',

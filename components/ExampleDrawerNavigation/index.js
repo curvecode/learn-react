@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, } from 'react-native';
-import { createDrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation';
 import Home from './home';
 import Notification from './notification';
+import TabNavigator from '../ExampleTabNavigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-class IndexDrawerNavigator extends Component {
-
-    render() {
-        return (
-            <View>
-                <Text> textInComponent </Text>
-            </View>
-        );
+export default createDrawerNavigator({
+    HomeView: {
+        screen: TabNavigator,
+        navigationOptions: {
+            drawerLabel: 'Home',
+            drawerIcon: ({ tintColor }) => (
+                <Icon name="home" size={26} color="#f4511e" />
+            ),
+        }
+    },
+    NotificationView: {
+        screen: Notification,
+        navigationOptions: {
+            drawerLabel: 'Notification',
+            drawerIcon: ({ tintColor }) => (
+                <Icon name="bell" size={26} color="#f4511e" />
+            ),
+        }
     }
-
-    ExampleDrawerNavigator = createDrawerNavigator({
-        HomeView: Home,
-        NotificationView: Notification
-    });
-}
-export default ExampleDrawerNavigator;
+});

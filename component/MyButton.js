@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class MyButton extends Component {
     render() {
         return (
-            <TouchableOpacity style={this.props.styleBtn}>
+            <TouchableOpacity style={this.props.styleBtn} onPress={this.props.onPress}>
                 <Text style={this.props.styleText}>{this.props.btnText}</Text>
             </TouchableOpacity>
         );

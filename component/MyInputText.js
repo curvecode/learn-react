@@ -17,6 +17,7 @@ export default class MyInputText extends Component {
                 returnKeyType="next"
                 underlineColorAndroid={"transparent"}
                 onBlur={this.props.onBlur}
+                onChange={this.props.onChange}
             ></TextInput>
         );
     }

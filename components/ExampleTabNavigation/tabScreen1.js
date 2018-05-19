@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, } from 'react-native';
+import { View, Text, Button, TouchableOpacity } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import Screen1 from './StackScreen/screen1';
+import Screen2 from './StackScreen/screen2';
 
-export default class TabScreen1 extends Component {
-    render() {
-        return (
-            <View>
-                <Text> Home page </Text>
-                <Button onPress={() => { this.props.navigation.toggleDrawer(); }} title={"Open menu"} />
+export default createStackNavigator({
+    Screen1: Screen1,
+    Screen2: Screen2
+}, {
+        initialRouteName: 'Screen1',
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+            
+        }
+    });
 
-            </View>
-        );
-    }
-}
