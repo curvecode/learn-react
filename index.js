@@ -12,7 +12,7 @@ console.disableYellowBox = true;
 // import MyScrollView from './component/MyScrollView';
 // AppRegistry.registerComponent('HelloApp', () => MyScrollView);
 
-import ExampleTabNavigation from './components/ParentStackNavigator'
+import ExampleTabNavigation from './components/ContactManager'
 AppRegistry.registerComponent('HelloApp', () => ExampleTabNavigation);
 // import ExampleDrawerNavigation from './components/ExampleDrawerNavigation';
 // AppRegistry.registerComponent('HelloApp', () => ExampleDrawerNavigation);
